@@ -8,8 +8,11 @@ import {
   Stethoscope,
   Sparkles,
 } from "lucide-react";
+import { Routes, Route, Link } from "react-router-dom";
+import BookAppointment from "./pages/BookAppointment";
+import AppointmentSuccess from "./pages/AppointmentSuccess";
 
-function App() {
+function Home() {
   return (
     <div className="min-h-screen bg-[#F7F5EF] text-[#153D39]">
 
@@ -33,9 +36,16 @@ function App() {
             Home
           </a>
 
-          <a href="#appointment" className="transition hover:opacity-70">
-            Book Appointment
-          </a>
+          <Link
+  to="/appointment"
+  className="group flex items-center gap-4 rounded-full bg-[#F5E8C8] px-6 py-3.5 text-xs font-semibold text-[#153D39] transition hover:scale-105"
+>
+  Book Appointment
+
+  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#153D39] text-white">
+    <ArrowRight size={14} />
+  </span>
+</Link>
 
           <a href="#about" className="transition hover:opacity-70">
             About
@@ -371,6 +381,19 @@ function Step({ number, title, text }) {
       </p>
 
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/appointment" element={<BookAppointment />} />
+      <Route
+  path="/appointment-success"
+  element={<AppointmentSuccess />}
+/>
+    </Routes>
   );
 }
 
