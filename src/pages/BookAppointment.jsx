@@ -12,25 +12,63 @@ import {
   Video,
   Stethoscope,
 } from "lucide-react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState ,useEffect} from "react";
+import { useNavigate, useLocation  } from "react-router-dom";
 
 function BookAppointment() {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
+  const location = useLocation();
+
+const aiData = location.state?.aiAppointmentData;
   const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    gender: "",
-    phone: "",
-    email: "",
-    reason: "",
-    patientType: "new",
-    previousDate: "",
-    appointmentDate: "",
-    appointmentTime: "",
-    consultation: "online",
-  });
+  name: "",
+  age: "",
+  gender: "",
+  phone: "",
+  email: "",
+  reason: "",
+  patientType: "new",
+  previousDate: "",
+  appointmentDate: aiData?.date || "",
+  appointmentTime: aiData?.time || "",
+  consultation:
+    aiData?.consultationType === "Clinic Visit"
+      ? "clinic"
+      : "online",
+});
+
+useEffect(() => {
+  if (!aiData) return;
+
+  setFormData((prev) => ({
+    ...prev,
+
+    appointmentDate:
+      aiData.date === "Today"
+        ? new Date().toISOString().split("T")[0]
+        : aiData.date === "Tomorrow"
+        ? new Date(Date.now() + 86400000)
+            .toISOString()
+            .split("T")[0]
+        : prev.appointmentDate,
+
+    appointmentTime:
+      aiData.time === "Morning"
+        ? "09:00 AM"
+        : aiData.time === "Afternoon"
+        ? "02:00 PM"
+        : aiData.time === "Evening"
+        ? "05:00 PM"
+        : prev.appointmentTime,
+
+    consultation:
+      aiData.consultationType === "Clinic Visit"
+        ? "clinic"
+        : "online",
+  }));
+}, []);
+
 
   const updateField = (field, value) => {
     setFormData({
@@ -38,6 +76,9 @@ function BookAppointment() {
       [field]: value,
     });
   };
+
+
+
 
   return (
     <div className="min-h-screen bg-[#F8F6F0] text-[#153D39]">
