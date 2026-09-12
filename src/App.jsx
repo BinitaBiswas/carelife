@@ -11,59 +11,77 @@ import {
 import { Routes, Route, Link } from "react-router-dom";
 import BookAppointment from "./pages/BookAppointment";
 import AppointmentSuccess from "./pages/AppointmentSuccess";
+import DoctorLogin from "./pages/DoctorLogin";
+import DoctorDashboard from "./pages/DoctorDashboard";
+import CallPatient from "./pages/CallPatient";
+import PatientConsent from "./pages/PatientConsent";
+import CallScreen from "./pages/CallScreen";
+import CallEnded from "./pages/CallEnded";
+import AIAppointmentAssistant from "./components/AIAppointmentAssistant";
 
 function Home() {
   return (
     <div className="min-h-screen bg-[#F7F5EF] text-[#153D39]">
 
       {/* ================= NAVBAR ================= */}
-      <nav className="absolute left-0 top-0 z-20 flex w-full items-center justify-between px-7 py-6 md:px-12 lg:px-16">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-5 md:px-12">
+  <div className="max-w-7xl mx-auto flex items-center justify-between">
 
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white">
-            <HeartPulse size={18} color="white" />
-          </div>
+    {/* Logo */}
+    <Link to="/" className="flex items-center gap-2">
+      <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white">
+        <span className="text-lg text-white">♡</span>
+      </div>
 
-          <span className="text-xl font-semibold tracking-tight text-white">
-            CareLife
-          </span>
-        </div>
+      <span className="text-lg font-semibold text-white">
+        CareLife
+      </span>
+    </Link>
 
-        {/* Navigation */}
-        <div className="hidden items-center gap-8 text-[11px] font-medium text-white md:flex">
-          <a href="#" className="transition hover:opacity-70">
-            Home
-          </a>
+    {/* Navigation */}
+    <div className="hidden md:flex items-center gap-9">
 
-          <Link
-  to="/appointment"
-  className="group flex items-center gap-4 rounded-full bg-[#F5E8C8] px-6 py-3.5 text-xs font-semibold text-[#153D39] transition hover:scale-105"
+      <Link
+        to="/"
+        className="text-sm font-medium text-white transition hover:opacity-70"
+      >
+        Home
+      </Link>
+
+      <Link
+        to="/appointment"
+        className="text-sm font-medium text-white transition hover:opacity-70"
+      >
+        Book Appointment
+      </Link>
+
+      <a
+        href="#about"
+        className="text-sm font-medium text-white transition hover:opacity-70"
+      >
+        About
+      </a>
+<a
+  href="#contact"
+  className="text-sm font-medium text-white transition hover:opacity-70"
 >
-  Book Appointment
+  Contact
+</a>
+    </div>
 
-  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#153D39] text-white">
-    <ArrowRight size={14} />
-  </span>
-</Link>
+    {/* Login */}
+    <Link
+      to="/doctor-login"
+      className="rounded-full bg-white px-7 py-3 text-sm font-semibold text-[#153D39] shadow-sm transition hover:scale-105"
+    >
+      Login
+    </Link>
 
-          <a href="#about" className="transition hover:opacity-70">
-            About
-          </a>
-
-          <a href="#contact" className="transition hover:opacity-70">
-            Contact
-          </a>
-        </div>
-
-        {/* Login */}
-        <button className="rounded-full bg-white px-7 py-2.5 text-xs font-semibold text-[#153D39] shadow-sm transition hover:scale-105">
-          Login
-        </button>
-      </nav>
+  </div>
+</nav>
 
       {/* ================= HERO ================= */}
-      <section className="relative min-h-[600px] overflow-hidden bg-[#0D3935]">
+      <section className="relative pt-28 min-h-[600px] overflow-hidden bg-[#0D3935]">
 
         {/* Background image */}
         <div
@@ -117,22 +135,25 @@ function Home() {
             {/* Buttons */}
             <div className="mt-8 flex items-center gap-5">
 
-              <button className="group flex items-center gap-4 rounded-full bg-[#F5E8C8] px-6 py-3.5 text-xs font-semibold text-[#153D39] transition hover:scale-105">
-                Book Appointment
+             <Link
+  to="/appointment"
+  className="inline-flex items-center gap-3 rounded-full bg-[#FFF1CF] px-6 py-3.5 text-sm font-semibold text-[#153D39] transition hover:scale-105"
+>
+  Book Appointment
+  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#153D39] text-white">
+    <ArrowRight size={15} />
+  </span>
+</Link>
+              <a
+  href="#how-it-works"
+  className="flex items-center gap-3 text-sm font-medium text-white transition hover:opacity-80"
+>
+  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/70">
+    <Play size={15} fill="white" />
+  </span>
 
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#153D39] text-white">
-                  <ArrowRight size={14} />
-                </span>
-              </button>
-
-              <button className="flex items-center gap-3 text-xs font-medium text-white">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/60">
-                  <Play size={13} fill="white" />
-                </span>
-
-                How it works
-              </button>
-
+  How it works
+</a>
             </div>
           </div>
         </div>
@@ -266,7 +287,7 @@ function Home() {
 
       {/* ================= HOW IT WORKS ================= */}
       <section
-        id="appointment"
+       id="how-it-works"
         className="bg-[#153D39] px-7 py-24 text-white md:px-12"
       >
 
@@ -306,6 +327,42 @@ function Home() {
 
         </div>
       </section>
+
+
+{/* contacts */}
+
+<section
+  id="contact"
+  className="bg-[#F8F6F0] px-6 py-12 md:px-12"
+>
+  <div className="mx-auto max-w-6xl">
+
+    <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+
+      <div>
+        <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#718985]">
+          Contact CareLife
+        </p>
+
+        <h2 className="mt-2 font-serif text-3xl text-[#153D39] md:text-4xl">
+          Get in touch with us.
+        </h2>
+      </div>
+
+      <div className="rounded-xl border border-[#E2E7E2] bg-white px-6 py-4">
+        <p className="text-[9px] uppercase tracking-wider text-[#8A9996]">
+          Email
+        </p>
+
+        <p className="mt-1 text-sm font-semibold text-[#153D39]">
+          carelife@example.com
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
       {/* ================= FOOTER ================= */}
       <footer
@@ -386,14 +443,53 @@ function Step({ number, title, text }) {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/appointment" element={<BookAppointment />} />
-      <Route
-  path="/appointment-success"
-  element={<AppointmentSuccess />}
-/>
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route
+          path="/appointment"
+          element={<BookAppointment />}
+        />
+
+        <Route
+          path="/appointment-success"
+          element={<AppointmentSuccess />}
+        />
+
+        <Route
+          path="/doctor-login"
+          element={<DoctorLogin />}
+        />
+
+        <Route
+          path="/doctor-dashboard"
+          element={<DoctorDashboard />}
+        />
+
+        <Route
+          path="/call-patient"
+          element={<CallPatient />}
+        />
+
+        <Route
+          path="/patient-consent"
+          element={<PatientConsent />}
+        />
+
+        <Route
+          path="/call-screen"
+          element={<CallScreen />}
+        />
+
+        <Route
+          path="/call-ended"
+          element={<CallEnded />}
+        />
+      </Routes>
+
+      <AIAppointmentAssistant />
+    </>
   );
 }
 
