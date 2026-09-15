@@ -78,6 +78,28 @@ useEffect(() => {
   };
 
 
+  const handleSubmit = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/api/appointments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      navigate("/appointment-success");
+    }
+  } catch (error) {
+    console.error("Appointment booking failed:", error);
+    alert("Unable to book appointment. Please try again.");
+  }
+};
+
+
 
 
   return (
@@ -602,7 +624,7 @@ useEffect(() => {
               </button>
 
              <button
-  onClick={() => navigate("/appointment-success")}
+ onClick={handleSubmit}
   className="rounded-full bg-[#0F625B] px-8 py-3 text-xs font-semibold text-white shadow-[0_8px_20px_rgba(15,98,91,0.2)] transition hover:scale-[1.03]"
 >
   Confirm Appointment

@@ -1,7 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, LockKeyhole, Stethoscope } from "lucide-react";
+import { useState } from "react";
 
 function DoctorLogin() {
+  const navigate = useNavigate();
+
+  const [doctorId, setDoctorId] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    if (
+      doctorId === "doctor@carelife.com" &&
+      password === "carelife123"
+    ) {
+      setError("");
+      navigate("/doctor-dashboard");
+    } else {
+      setError("Invalid Doctor ID or password.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F8F6F0] text-[#153D39]">
 
@@ -55,7 +76,7 @@ function DoctorLogin() {
             </div>
 
             {/* Form */}
-            <form className="mt-8 space-y-5">
+            <form onSubmit={handleLogin} className="mt-8 space-y-5">
 
               <div>
                 <label className="text-[11px] font-semibold">
@@ -64,6 +85,8 @@ function DoctorLogin() {
 
                 <input
                   type="text"
+                  value={doctorId}
+                  onChange={(e) => setDoctorId(e.target.value)}
                   placeholder="Enter your doctor ID or email"
                   className="mt-2 w-full rounded-xl border border-[#DDE5E1] bg-[#FCFCF9] px-4 py-3.5 text-xs outline-none placeholder:text-[#A5B2AF] focus:border-[#153D39]"
                 />
@@ -78,6 +101,8 @@ function DoctorLogin() {
 
                   <input
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
                     className="w-full rounded-xl border border-[#DDE5E1] bg-[#FCFCF9] px-4 py-3.5 pr-11 text-xs outline-none placeholder:text-[#A5B2AF] focus:border-[#153D39]"
                   />
@@ -89,6 +114,12 @@ function DoctorLogin() {
 
                 </div>
               </div>
+
+              {error && (
+                <p className="text-center text-[11px] text-red-500">
+                  {error}
+                </p>
+              )}
 
               <div className="flex items-center justify-between text-[10px]">
 
