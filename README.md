@@ -1,16 +1,87 @@
-# React + Vite
+# CareLife 🩺
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CareLife is a modern doctor appointment web application designed to make healthcare appointment booking simple, clear, and user-friendly.
 
-Currently, two official plugins are available:
+The application allows patients to explore the clinic, choose their preferred consultation type, select an appointment date and time, enter their details, and review their appointment before confirmation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+It also includes a **CareLife AI Appointment Assistant** that guides patients through the appointment-booking process.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🩺 Doctor appointment booking
+- 📅 Date and time selection
+- 👤 Patient information form
+- 💻 Online consultation option
+- 🏥 Clinic visit option
+- 📋 Multi-step appointment form
+- 🔍 Appointment review before confirmation
+- 🤖 AI-powered appointment assistant
+- ⚡ Interactive and responsive UI
+- 📱 Mobile-friendly design
+- 🔐 Login interface
+- 📞 Contact section
+- 🎨 Clean and modern healthcare-focused design
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🤖 CareLife AI
+
+CareLife includes an AI Appointment Assistant to make appointment booking easier.
+
+The assistant helps the patient:
+
+1. Choose consultation type
+2. Select appointment date
+3. Select preferred time
+4. View appointment preferences
+5. Continue directly to the appointment form
+
+The selected information is passed to the appointment form to reduce repetitive input.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React.js
+- Vite
+- Tailwind CSS
+- JavaScript
+- React Router
+- Lucide React Icons
+
+### Backend
+
+Backend integration is planned for a future version.
+
+The current project focuses on the frontend experience and AI-assisted appointment flow.
+
+---
+
+## 📂 Project Structure
+
+```text
+CareLife/
+│
+├── src/
+│   ├── components/
+│   │   └── AIAppointmentAssistant.jsx
+│   │
+│   ├── pages/
+│   │   ├── BookAppointment.jsx
+│   │   ├── DoctorDashboard.jsx
+│   │   ├── DoctorLogin.jsx
+│   │   ├── CallPatient.jsx
+│   │   ├── CallScreen.jsx
+│   │   ├── CallEnded.jsx
+│   │   └── PatientConsent.jsx
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── public/
+├── package.json
+└── README.md
